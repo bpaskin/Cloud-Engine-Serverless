@@ -10,7 +10,7 @@
 	<body>
 		<img src="https://static.eurovision.tv/dist/assets/images/esc/2022/logo-black.b9b5bfc57b81d725d184..svg">
 		<H1>Make your Eurovision Song Contest Selection</h1>
-		<form action="http://<?php print($url); ?>" method="POST">
+		<form action="https://<?php print($url); ?>" method="POST">
 			<select name='selection'>
 				<option value='Albania'>Albania</option>
 				<option value='Armenia'>Armenia</option>
