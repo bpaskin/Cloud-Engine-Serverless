@@ -28,10 +28,6 @@ public class AcceptVote implements HttpHandler {
 	@Override
 	public void handle(HttpExchange t) throws IOException {
 		
-		// setup response
-		int responseCode = 200;
-		String response = "ok";
-		
 		// get the form data sent from the HTTP Page
         StringBuilder sb = new StringBuilder();
         InputStream ios = t.getRequestBody();
@@ -47,22 +43,47 @@ public class AcceptVote implements HttpHandler {
         String[] parts;
         
         if (sb.length() == 0) {
-        	responseCode = 400;
-        }
-        
-        if (sb.length() > 0) {
+        	sendResponse(t, 400, "No selection sent");
+        	return;
+        } else {
         	parts = sb.toString().split("&");
-        	
-        	if (parts.length == 1) {
-        		
-        	} else {
-        		
-        	}
         }
-       
         
-
+    	if (parts.length != 1) {
+        	sendResponse(t, 400, "invalid data sent");
+        	return;
+    	} else  {
+    		parts = parts[0].toString().split("=");
+    	}
+        	
+    	if (parts.length != 2 ) {
+        	sendResponse(t, 400, "invalid data sent");
+        	return;
+    	}
+    	
+		if (!parts[0].equalsIgnoreCase("selection")) {
+        	sendResponse(t, 400, "invalid data sent");
+        	return;
+    	}   
 		
+		boolean found = false;
+		for (Countries country : Countries.values()) {
+			if (parts[1].equalsIgnoreCase(country.toString())) {
+				found = true;
+			}
+		}
+		
+		if (!found) {
+        	sendResponse(t, 400, "invalid country");
+        	return;
+		}
+		
+    	sendResponse(t, 200, "vote accetped");
+    	return;
+		
+	}
+	
+	private void sendResponse(HttpExchange t, int responseCode, String response) throws IOException{
 		t.sendResponseHeaders(responseCode, response.length());
 		OutputStream os = t.getResponseBody();
 		os.write(response.getBytes());
