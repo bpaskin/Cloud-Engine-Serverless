@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM php:apache
 
-COPY index.html /usr/share/nginx/html
+COPY index.php /var/www/html/
 
