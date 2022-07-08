@@ -30,7 +30,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
-							<mainClass>com.ibm.example.serverless.QueryVoteByCountry</mainClass>
+							<mainClass>com.ibm.example.serverless.QueryVotesByCountry</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
