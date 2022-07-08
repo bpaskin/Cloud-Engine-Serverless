@@ -6,6 +6,8 @@ import com.ibm.msg.client.wmq.WMQConstants;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -70,7 +72,7 @@ public class GetMessage implements HttpHandler {
 		
 		Connection conn = null;
 		MQConnectionFactory cf = new MQQueueConnectionFactory();
-		String vote; 
+		String vote = "";
 
 		
 		try {
@@ -106,12 +108,18 @@ public class GetMessage implements HttpHandler {
 		}
 		
 		// send to cloudant ...
+		
+		if (vote == null || vote.length() == 0) {
+			System.err.println("Vote has no data");
+			return;
+		}
+		
 		String data = "country=" + vote;
 				
 		 try {
 			    //Create connection
 			    URL url = new URL(DB_URL);
-			    HttpsURLConnectionconnection connection = (HttpsURLConnection) url.openConnection();
+			    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 			    connection.setRequestMethod("POST");
 			    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			    connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
