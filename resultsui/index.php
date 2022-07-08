@@ -19,7 +19,7 @@
 				let xhr = new XMLHttpRequest();
                 		
 				// open a connection
-				xhr.open("POST", <?php print($url); ?>, true);
+				xhr.open("POST", "https://<?php print($url); ?>", true);
 	
 				// Set the request header i.e. which type of content you are sending
 				xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
