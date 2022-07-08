@@ -36,6 +36,8 @@ public class GetMessage implements HttpHandler {
 	
 	public static void main(String[] args) {
 		
+		System.setProperty("javax.net.debug", "all");
+		
 		MQ_QMGR = System.getenv("MQ_QMGR");
 		MQ_PORT = System.getenv("MQ_PORT");
 		MQ_HOST = System.getenv("MQ_HOST");
