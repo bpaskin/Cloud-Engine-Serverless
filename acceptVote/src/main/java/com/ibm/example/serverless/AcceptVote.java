@@ -133,7 +133,7 @@ public class AcceptVote implements HttpHandler {
 			conn.close();
 		} catch (JMSException e) {
 			e.printStackTrace(System.err);
-	    	sendResponse(t, HttpsURLConnection.HTTP_NOT_ACCEPTABLE, "MQ Exception : " +  e.getStackTrace());
+	    	sendResponse(t, HttpsURLConnection.HTTP_NOT_ACCEPTABLE, "MQ Exception : " +  e.getMessage());
 		}
 			
     	sendResponse(t, HttpsURLConnection.HTTP_OK, "vote accepted");
