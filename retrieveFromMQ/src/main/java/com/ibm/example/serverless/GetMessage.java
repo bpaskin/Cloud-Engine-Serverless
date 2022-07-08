@@ -24,10 +24,11 @@ import javax.net.ssl.HttpsURLConnection;
 public class GetMessage implements HttpHandler {
 	
 	private static String MQ_QMGR;
-	private static String  MQ_PORT;
+	private static String MQ_PORT;
 	private static String MQ_HOST;
 	private static String MQ_QUEUE; 
 	private static String MQ_CHANNEL; 
+	private static String DB_URL; 
 
 	
 	public static void main(String[] args) {
@@ -37,10 +38,15 @@ public class GetMessage implements HttpHandler {
 		MQ_HOST = System.getenv("MQ_HOST");
 		MQ_QUEUE = System.getenv("MQ_QUEUE");
 		MQ_CHANNEL = System.getenv("MQ_CHANNEL");
+		DB_URL= System.getenv("DB_URL");
 
 		
 		if (MQ_QMGR == null || MQ_PORT == null || MQ_HOST == null || MQ_QUEUE == null || MQ_CHANNEL == null) {
 			throw new RuntimeException("MQ environment variables not set!");
+		}
+		
+		if (DB_URL == null) {
+			throw new RuntimeException("DB URL environment variables not set!");
 		}
 		
 		try {
@@ -92,19 +98,11 @@ public class GetMessage implements HttpHandler {
 			
 		} catch (JMSException e) {
 			e.printStackTrace(System.err);
-	    	sendResponse(t, HttpsURLConnection.HTTP_NOT_ACCEPTABLE, "MQ Exception : " +  e.getMessage());
 		}
 		
 		// send to cloudant ...
 		
-    	sendResponse(t, HttpsURLConnection.HTTP_OK, "vote accepted");
+		t.close();
     	return;
-	}
-	
-	private void sendResponse(HttpExchange t, int responseCode, String response) throws IOException{
-		t.sendResponseHeaders(responseCode, response.length());
-		OutputStream os = t.getResponseBody();
-		os.write(response.getBytes());
-		os.close();
 	}
 }
