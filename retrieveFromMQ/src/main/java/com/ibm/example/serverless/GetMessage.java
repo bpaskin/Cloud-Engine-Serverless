@@ -70,6 +70,8 @@ public class GetMessage implements HttpHandler {
 		
 		Connection conn = null;
 		MQConnectionFactory cf = new MQQueueConnectionFactory();
+		String vote; 
+
 		
 		try {
 			cf.setTransportType(WMQConstants.WMQ_CM_CLIENT);
@@ -88,7 +90,6 @@ public class GetMessage implements HttpHandler {
 			
 			conn.start();
 			
-			String vote; 
 			if ((receivedMsg = consumer.receiveNoWait()) != null) {
 				if (receivedMsg != null) {
 					vote = ((TextMessage) receivedMsg).getText();
