@@ -116,6 +116,7 @@ public class GetMessage implements HttpHandler {
 		
 		String data = "country=" + vote;
 				
+		System.out.println("before connection");
 		 try {
 			    //Create connection
 			    URL url = new URL(DB_URL);
@@ -126,13 +127,19 @@ public class GetMessage implements HttpHandler {
 			    connection.setUseCaches(false);
 			    connection.setDoOutput(true);
 
+				System.out.println("before data");
+
 			    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 			    wr.writeBytes(data);
 			    wr.close();
-			    
+				System.out.println("after data");
+				
 			    connection.disconnect();
 		 } catch (Exception e) {
 				e.printStackTrace(System.err);
 		 }
+		 
+			System.out.println("after connection");
+
 	}
 }
