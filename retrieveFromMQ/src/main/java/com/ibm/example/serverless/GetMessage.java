@@ -124,12 +124,12 @@ public class GetMessage implements HttpHandler {
 			    //Create connection
 			    URL url = new URL(DB_URL);
 			    HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
+			    connection.setDoOutput(true);
+			    connection.setInstanceFollowRedirects(false);
 			    connection.setRequestMethod("POST");
 			    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 			    connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
 			    connection.setUseCaches(false);
-			    connection.setDoOutput(true);
-			    connection.connect();
 
 				System.out.println("before data");
 
@@ -139,7 +139,6 @@ public class GetMessage implements HttpHandler {
 			    
 				System.out.println("after data");
 				
-			    connection.disconnect();
 		 } catch (Exception e) {
 				e.printStackTrace(System.err);
 		 }
