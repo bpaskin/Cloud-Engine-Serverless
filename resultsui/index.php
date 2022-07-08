@@ -34,7 +34,7 @@
 					}
 				};
 	
-				var data = '"country"="' + name.toLowerCase() + '"';
+				var data = 'country=' + name.toLowerCase();
 				console.log(data);
 
 				// Sending data with the request

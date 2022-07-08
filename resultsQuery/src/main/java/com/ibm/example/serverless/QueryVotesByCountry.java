@@ -109,6 +109,7 @@ public class QueryVotesByCountry implements HttpHandler {
 	}
 	
 	private void sendResponse(HttpExchange t, int responseCode, String response) throws IOException{
+		t.getResponseHeaders().set("Access-Control-Allow-Origin: *");
 		t.sendResponseHeaders(responseCode, response.length());
 		OutputStream os = t.getResponseBody();
 		os.write(response.getBytes());
