@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.net.URL;
 
 import javax.jms.Connection;
 import javax.jms.JMSException;
@@ -65,6 +66,8 @@ public class GetMessage implements HttpHandler {
 	@Override
 	public void handle(HttpExchange t) throws IOException {
 		
+		t.close();
+		
 		Connection conn = null;
 		MQConnectionFactory cf = new MQQueueConnectionFactory();
 		
@@ -98,11 +101,29 @@ public class GetMessage implements HttpHandler {
 			
 		} catch (JMSException e) {
 			e.printStackTrace(System.err);
+			return;
 		}
 		
 		// send to cloudant ...
-		
-		t.close();
-    	return;
+		String data = "country=" + vote;
+				
+		 try {
+			    //Create connection
+			    URL url = new URL(DB_URL);
+			    HttpsURLConnectionconnection connection = (HttpsURLConnection) url.openConnection();
+			    connection.setRequestMethod("POST");
+			    connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			    connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
+			    connection.setUseCaches(false);
+			    connection.setDoOutput(true);
+
+			    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+			    wr.writeBytes(data);
+			    wr.close();
+			    
+			    connection.disconnect();
+		 } catch (Exception e) {
+				e.printStackTrace(System.err);
+		 }
 	}
 }
