@@ -32,8 +32,10 @@ public class QueryVotesByCountry implements HttpHandler {
 		IAMKEY = System.getenv("IAMKEY");
 		SERVICE_NAME = System.getenv("SERVICE_NAME");
 		SERVICE_URL = System.getenv("SERVICE_URL");
+		DBNAME = System.getenv("DBNAME");
 
-		if (IAMKEY == null || SERVICE_NAME == null || SERVICE_URL == null) {
+
+		if (IAMKEY == null || SERVICE_NAME == null || SERVICE_URL == null || DBNAME == null) {
 			throw new RuntimeException("Cloudant environment variables not set!");
 		}
 		
