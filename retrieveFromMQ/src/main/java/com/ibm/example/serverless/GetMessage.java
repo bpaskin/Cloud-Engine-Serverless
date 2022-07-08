@@ -133,8 +133,8 @@ public class GetMessage implements HttpHandler {
 
 				System.out.println("before data");
 
-			    OutputStreamWriter wr = new OutputStreamWriter(connection.getOuputStream());
-			    wr.writeBytes(data);
+			    OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
+			    wr.write(data)
 			    wr.flush();
 			    
 				System.out.println("after data");
