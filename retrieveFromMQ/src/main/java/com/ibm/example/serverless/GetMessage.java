@@ -126,6 +126,7 @@ public class GetMessage implements HttpHandler {
 			    connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
 			    connection.setUseCaches(false);
 			    connection.setDoOutput(true);
+			    connection.connect();
 
 				System.out.println("before data");
 
