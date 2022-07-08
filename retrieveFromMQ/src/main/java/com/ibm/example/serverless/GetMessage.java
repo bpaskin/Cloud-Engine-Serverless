@@ -11,6 +11,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.InetSocketAddress;
 import java.net.URL;
 
@@ -132,9 +133,10 @@ public class GetMessage implements HttpHandler {
 
 				System.out.println("before data");
 
-			    DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
+			    OutputStreamWriter wr = new OutputStreamWriter(connection.getOuputStream());
 			    wr.writeBytes(data);
-			    wr.close();
+			    wr.flush();
+			    
 				System.out.println("after data");
 				
 			    connection.disconnect();
