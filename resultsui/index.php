@@ -1,18 +1,18 @@
 <?php
-  $url = $_SERVER['HTTP_HOST'];
-  $url = str_replace("resultsui", "resultsquery", $url);
+$url = $_SERVER['HTTP_HOST'];
+$url = str_replace("resultsui", "resultsquery", $url);
 ?>
 
 <html>
-	<head>
-		<title>Eurovision 2022 Results</title>
-	</head>
-	<body>
-        <img src="https://static.eurovision.tv/dist/assets/images/esc/2022/logo-black.b9b5bfc57b81d725d184..svg">
-		<h1>Results</h1>
-		<p id="result">
-		</p>
-		<script>
+<head>
+<title>Eurovision 2022 Results</title>
+</head>
+<body>
+	<img
+		src="https://static.eurovision.tv/dist/assets/images/esc/2022/logo-black.b9b5bfc57b81d725d184..svg">
+	<h1>Results</h1>
+	<p id="result"></p>
+	<script>
 			async function sendJSON(name){
 				// Creating a XHR object
 				let result = document.querySelector('.result');
@@ -88,5 +88,5 @@
             }
             
 		</script>
-		</body>
+</body>
 </html>

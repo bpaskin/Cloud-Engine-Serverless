@@ -95,9 +95,7 @@ public class WriteRecord implements HttpHandler {
     	}   
 		
 		String country = parts[1];
-		
-		t.close();
-		
+				
 		IamAuthenticator authenticator = new IamAuthenticator.Builder().apikey(IAMKEY).build();
 
 		Cloudant service = new Cloudant(SERVICE_NAME, authenticator);
@@ -112,5 +110,8 @@ public class WriteRecord implements HttpHandler {
 		DocumentResult response = service.putDocument(documentOptions).execute().getResult();
 		
 		System.out.println(response);
+		
+		t.close();
+
 	}
 }

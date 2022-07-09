@@ -119,7 +119,6 @@ public class GetMessage implements HttpHandler {
 		
 		String data = "country=" + vote;
 				
-		System.out.println("before connection");
 		 try {
 			    //Create connection
 			    URL url = new URL(DB_URL);
@@ -131,19 +130,17 @@ public class GetMessage implements HttpHandler {
 			    connection.setRequestProperty("Content-Length", Integer.toString(data.getBytes().length));
 			    connection.setUseCaches(false);
 
-				System.out.println("before data");
-
-			    OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
-			    wr.write(data);
+			    OutputStream wr = connection.getOutputStream();
+			    wr.write(data.getBytes("UTF-8"));
 			    wr.flush();
+			    wr.close();
 			    
-				System.out.println("after data");
+			    int responseCode = connection.getResponseCode();
+			    System.out.println("HTTP Resonse : " + responseCode);
 				
 		 } catch (Exception e) {
 				e.printStackTrace(System.err);
 		 }
 		 
-			System.out.println("after connection");
-
 	}
 }
