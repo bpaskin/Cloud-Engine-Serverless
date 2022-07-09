@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.Collections;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -107,6 +108,7 @@ public class WriteRecord implements HttpHandler {
 				
 			Document document = new Document();
 			document.put("vote", country.toLowerCase());
+			document.out("docId", UUID.randomUUID().toString().replace("-", ""));
 			PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).document(document).build();
 			DocumentResult response = service.putDocument(documentOptions).execute().getResult();
 			
