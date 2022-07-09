@@ -111,7 +111,6 @@ public class WriteRecord implements HttpHandler {
 			PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).docId(UUID.randomUUID().toString().replace("-", "")).document(document).build();
 			DocumentResult response = service.putDocument(documentOptions).execute().getResult();
 			
-			System.out.println(response);
 		} catch (Exception e) {
 			e.printStackTrace(System.err);
 		}
