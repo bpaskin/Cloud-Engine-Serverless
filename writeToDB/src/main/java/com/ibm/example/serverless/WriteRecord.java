@@ -90,26 +90,30 @@ public class WriteRecord implements HttpHandler {
     	}
     	
 		if (!parts[0].equalsIgnoreCase("country")) {
-			System.err.println("invalid data sent"); 
+			System.err.println("invalid data sent - no country specified"); 
 			return;
     	}   
 		
-		String country = parts[1];
+		try {
+			String country = parts[1];
+					
+			IamAuthenticator authenticator = new IamAuthenticator.Builder().apikey(IAMKEY).build();
+	
+			Cloudant service = new Cloudant(SERVICE_NAME, authenticator);
+			service.setServiceUrl(SERVICE_URL);
+	
+			HttpConfigOptions options =  new HttpConfigOptions.Builder().loggingLevel(HttpConfigOptions.LoggingLevel.BASIC).build();
+			service.configureClient(options);
 				
-		IamAuthenticator authenticator = new IamAuthenticator.Builder().apikey(IAMKEY).build();
-
-		Cloudant service = new Cloudant(SERVICE_NAME, authenticator);
-		service.setServiceUrl(SERVICE_URL);
-
-		HttpConfigOptions options =  new HttpConfigOptions.Builder().loggingLevel(HttpConfigOptions.LoggingLevel.BASIC).build();
-		service.configureClient(options);
+			Document document = new Document();
+			document.put("vote", country.toLowerCase());
+			PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).document(document).build();
+			DocumentResult response = service.putDocument(documentOptions).execute().getResult();
 			
-		Document document = new Document();
-		document.put("vote", country.toLowerCase());
-		PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).document(document).build();
-		DocumentResult response = service.putDocument(documentOptions).execute().getResult();
-		
-		System.out.println(response);
+			System.out.println(response);
+		} catch (Exception e) {
+			e.printStackTrace(System.err);
+		}
 		
 		t.close();
 
