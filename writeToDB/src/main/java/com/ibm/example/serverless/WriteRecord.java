@@ -108,8 +108,7 @@ public class WriteRecord implements HttpHandler {
 				
 			Document document = new Document();
 			document.put("vote", country.toLowerCase());
-			document.put("docId", UUID.randomUUID().toString().replace("-", ""));
-			PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).document(document).build();
+			PutDocumentOptions documentOptions = new PutDocumentOptions.Builder().db(DBNAME).docId(UUID.randomUUID().toString().replace("-", "")).document(document).build();
 			DocumentResult response = service.putDocument(documentOptions).execute().getResult();
 			
 			System.out.println(response);
