@@ -88,7 +88,7 @@ The Endpont will be displayed after deployment.</br>
 - Check on the build run using the name from previous command</br>
 `ibmcloud ce buildrun logs -n <name from above command>`
 - Create a new application</br>
-ibmcloud ce app create --name resultsui --image <registry_url>/resultsui --registry-secret quay.io --visibility public --max-scale 6`
+`ibmcloud ce app create --name resultsui --image <registry_url>/resultsui --registry-secret quay.io --visibility public --max-scale 6`
 The Endpont will be displayed after deployment.</br>
 </br>
 
@@ -129,7 +129,7 @@ The Endpont will be displayed after deployment.</br>
 #### IBM MQ Setup
 This will setup a new QMGR that will accept messages for voting and then trigger and call the `Eurovision/updatingDB` endpoint to process messages
 
-The `EUROVISIONCE.TRIGGER` in the `serverless.mqsc` file will need to be updated with the proper URL from the `Eurovision/updatingDB` Action.
+The `EUROVISIONCE.TRIGGER` in the `serverlessce.mqsc` file will need to be updated with the proper URL from the `Eurovision/updatingDB` Action.
 
 - Create the QMGR: </br> 
 `/usr/mqm/bin/crtmqm SERVERLESS`
