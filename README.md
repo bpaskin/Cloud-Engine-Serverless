@@ -127,7 +127,7 @@ The Endpont will be displayed after deployment.</br>
 
 ---
 #### IBM MQ Setup
-This will setup a new QMGR that will accept messages for voting and then trigger and call the `Eurovision/updatingDB` endpoint to process messages
+This will setup a new QMGR that will accept messages for voting and then trigger and call the `EurovisionCE/getmessages` endpoint to process messages
 
 The `EUROVISIONCE.TRIGGER` in the `serverlessce.mqsc` file will need to be updated with the proper URL from the `Eurovision/updatingDB` Action.
 
