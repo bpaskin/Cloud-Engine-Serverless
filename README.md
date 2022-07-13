@@ -3,7 +3,7 @@
 
 This is a small example of using [Code Engine](https://www.ibm.com/cloud/code-engine) to create a sample flow with different small applications that utilise IBM MQ, Cloudant DB and is writen in Java, PHP, though Cloud Engine supports several other languages.  This is a similar example to the [Serverless on IBM Cloud](https://github.com/bpaskin/Serverless-on-IBM-Cloud) which utilises [IBM Cloud Functions](https://cloud.ibm.com/functions/) for Serverless computing.
 
-![Diagram of flow](https://github.com/bpaskin/IBM-Cloud-Functions/blob/main/images/serverless.drawio.png?raw=true)
+![Diagram of flow](https://github.com/bpaskin/Cloud-Engine-Serverless/blob/main/images/CodeEngine.drawio.png?raw=true)
 
 ---
 #### Prerequistes:
